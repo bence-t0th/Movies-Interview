@@ -9,6 +9,7 @@ import Foundation
 
 class MockViewModel: MoviesScreenViewModelProtocol {
     var movies: [MovieVM] = previewMovies
+    var genres: [Genre] = previewGenres
 }
 
 class MockMovieDetailsViewModel: MovieDetailsScreenViewModelProtocol {

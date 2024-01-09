@@ -21,7 +21,7 @@ struct MovieDetailsScreen<ViewModel: MovieDetailsScreenViewModelProtocol>: View 
         ScrollView {
             Color.clear
                 .aspectRatio(0.7, contentMode: .fill)
-                .overlay(AsyncImage(url: viewModel.movie.image.large))
+                .overlay(AsyncImage(url: "https://image.tmdb.org/t/p/w500\(viewModel.movie.poster_path)"))
                 .clipped()
                 .overlay {
                     LinearGradient(
@@ -36,10 +36,10 @@ struct MovieDetailsScreen<ViewModel: MovieDetailsScreenViewModelProtocol>: View 
 
             VStack(spacing: 16) {
                 Button(action: { viewModel.markMovie() }) {
-                        Image(systemName: viewModel.movie.isMarked ? "star.fill":  "plus")
+                        Image(systemName: viewModel.movie.isMarked ?? false ? "star.fill":  "plus")
                             .resizable()
                             .frame(width: 24, height: 24)
-                            .foregroundColor(viewModel.movie.isMarked ? .yellow : .black)
+                            .foregroundColor(viewModel.movie.isMarked ?? false ? .yellow : .black)
                 }
                 .padding(8)
                 .background(Material.regularMaterial)
@@ -49,7 +49,7 @@ struct MovieDetailsScreen<ViewModel: MovieDetailsScreenViewModelProtocol>: View 
                 Text("Overview")
                     .font(.title)
                     .fontWeight(.bold)
-                Text(viewModel.movie.overView)
+                Text(viewModel.movie.overview)
                     .font(.body)
             }
             .offset(y: -100)

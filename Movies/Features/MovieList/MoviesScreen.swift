@@ -9,6 +9,7 @@ import SwiftUI
 
 protocol MoviesScreenViewModelProtocol: ObservableObject {
     var movies: [MovieVM] { get }
+    var genres: [Genre] { get }
 }
 
 struct MoviesScreen<ViewModel: MoviesScreenViewModelProtocol>: View {
@@ -18,7 +19,7 @@ struct MoviesScreen<ViewModel: MoviesScreenViewModelProtocol>: View {
         NavigationView {
             List(viewModel.movies) { movie in
                 NavigationLink(destination: destinationView(using: movie)) {
-                    MovieListItem(movie: movie)
+                    MovieListItem(movie: movie, genres: viewModel.genres)
                         .padding(.trailing, 8)
                 }
                 .padding(.trailing, 16)

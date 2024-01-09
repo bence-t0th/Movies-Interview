@@ -7,17 +7,26 @@
 
 import Foundation
 
-struct MovieVM: Identifiable {
-    struct Image {
-        let small: String
-        let large: String
-    }
-
-    let id: String
+struct MovieVM: Identifiable, Codable {
+    let id: Int
     let title: String
-    let genres: String
-    let overView: String
-    let image: Image
-    let popularity: Float
-    var isMarked: Bool
+    let genre_ids: [Int]
+    let overview: String
+    let poster_path: String
+    let vote_average: Float
+    
+    var isMarked: Bool? = false
+    var genres: String? = ""
+}
+
+struct MovieList: Codable {
+    let page: Int
+    let results: [MovieVM]
+    let totalPages, totalResults: Int
+
+    enum CodingKeys: String, CodingKey {
+        case page, results
+        case totalPages = "total_pages"
+        case totalResults = "total_results"
+    }
 }
